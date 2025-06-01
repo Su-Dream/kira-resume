@@ -14,6 +14,7 @@ const app = createApp({
         about:
           "我是一名充满热情的前端开发工程师，拥有3年的开发经验。我热爱创造用户友好的界面，并且擅长使用现代前端技术栈。我喜欢二次元文化，并将这种美学融入到我的设计中。在工作中，我注重团队协作和持续学习，致力于创造高质量的用户体验。",
         avatar: "img/avatar.jpg", // 头像路径
+        github: "https://github.com/Raphitaria", // GitHub地址
       },
 
       // 技能列表
@@ -84,6 +85,7 @@ const app = createApp({
             "一个面向ACG爱好者的社区平台，用户可以分享自己的作品和交流。",
           image: "img/project1.jpg",
           tags: ["Vue.js", "Node.js", "MongoDB"],
+          link: "https://github.com/Raphitaria/anime-community",
         },
         {
           name: "动漫角色图鉴",
@@ -91,6 +93,7 @@ const app = createApp({
             "收集整理了上千个动漫角色信息的在线图鉴，支持多种筛选和搜索功能。",
           image: "img/project2.jpg",
           tags: ["React", "Redux", "Firebase"],
+          link: "https://github.com/Raphitaria/anime-character-guide",
         },
         {
           name: "个人博客系统",
@@ -98,6 +101,7 @@ const app = createApp({
             "一个具有二次元风格的个人博客系统，支持Markdown编辑和代码高亮。",
           image: "img/project3.jpg",
           tags: ["Vue.js", "Express", "MySQL"],
+          link: "https://github.com/Raphitaria/anime-blog",
         },
       ],
 

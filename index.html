@@ -32,6 +32,11 @@
             <div><i class="bi bi-phone"></i> {{ profile.phone }}</div>
             <div><i class="bi bi-geo-alt"></i> {{ profile.location }}</div>
           </div>
+          <div class="github-btn-container">
+            <a :href="profile.github" target="_blank" class="github-btn">
+              <i class="bi bi-github"></i> GitHub
+            </a>
+          </div>
         </div>
       </div>
     </header>
@@ -127,10 +132,15 @@
                 @error="handleImageError($event, 'project', index)">
             </div>
             <div class="project-info">
-              <h3>{{ project.name }}</h3>
+              <h3 class="project-title">{{ project.name }}</h3>
               <p class="project-description">{{ project.description }}</p>
-              <div class="project-tags">
-                <span v-for="(tag, tagIndex) in project.tags" :key="tagIndex" class="project-tag">{{ tag }}</span>
+              <div class="project-footer">
+                <div class="project-tags">
+                  <span v-for="(tag, tagIndex) in project.tags" :key="tagIndex" class="project-tag">{{ tag }}</span>
+                </div>
+                <a v-if="project.link" :href="project.link" target="_blank" class="project-link-btn">
+                  访问项目
+                </a>
               </div>
             </div>
           </div>
