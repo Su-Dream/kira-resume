@@ -1,0 +1,599 @@
+/* 全局样式 */
+:root {
+  --primary-color: #4a89dc;
+  --primary-light: #5d9cec;
+  --primary-dark: #3875d7;
+  --secondary-color: #f5f7fa;
+  --text-color: #333;
+  --text-light: #666;
+  --border-color: #e6e9ed;
+  --accent-color: #ff9ff3;
+  --success-color: #87d37c;
+  --warning-color: #f4d03f;
+  --danger-color: #e74c3c;
+  --shadow-color: rgba(74, 137, 220, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans SC", sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 装饰元素 */
+.decoration-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  background: var(--primary-color);
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: -100px;
+  animation: float 15s infinite ease-in-out;
+}
+
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  bottom: 10%;
+  left: -50px;
+  animation: float 12s infinite ease-in-out reverse;
+}
+
+.decoration-square {
+  position: absolute;
+  opacity: 0.05;
+  background: var(--primary-color);
+  transform: rotate(45deg);
+}
+
+.square-1 {
+  width: 150px;
+  height: 150px;
+  top: 20%;
+  left: -75px;
+  animation: rotate 20s infinite linear;
+}
+
+.square-2 {
+  width: 100px;
+  height: 100px;
+  bottom: 15%;
+  right: -50px;
+  animation: rotate 15s infinite linear reverse;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 头部样式 */
+.header {
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 20px var(--shadow-color);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+  background-size: cover;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.avatar-container {
+  flex-shrink: 0;
+}
+
+.avatar-border {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  padding: 5px;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.avatar-border:hover .avatar {
+  transform: scale(1.05);
+}
+
+.header-text {
+  flex-grow: 1;
+}
+
+.header-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.95rem;
+}
+
+.contact-info div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 区域通用样式 */
+.section {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.section-header {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary-light);
+  position: relative;
+}
+
+.section-header h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-header h2 i {
+  font-size: 1.2em;
+}
+
+/* 技能样式 */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.skill-item {
+  margin-bottom: 15px;
+}
+
+.skill-name {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.skill-bar-container {
+  height: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.skill-bar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--primary-light),
+    var(--primary-color)
+  );
+  border-radius: 5px;
+  transition: width 1s ease-in-out;
+}
+
+.skill-level {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  text-align: right;
+}
+
+/* 技能介绍样式 */
+.skill-details-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.skill-detail-item {
+  position: relative;
+  padding: 10px 0 10px 25px;
+  border-bottom: 1px dashed var(--border-color);
+  line-height: 1.8;
+}
+
+.skill-detail-item:last-child {
+  border-bottom: none;
+}
+
+.skill-detail-item::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: var(--primary-light);
+  font-size: 14px;
+}
+
+.skill-detail-item p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.tech-tag {
+  display: inline-block;
+  background-color: rgba(74, 137, 220, 0.1);
+  color: var(--primary-dark);
+  border: 1px solid var(--primary-light);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0 2px;
+  transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+  background-color: var(--primary-light);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.skill-details-section::before {
+  content: "⚙";
+  position: absolute;
+  top: 12px;
+  right: 22px;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  opacity: 0.2;
+}
+
+/* 时间线样式 */
+.timeline-item {
+  position: relative;
+  padding-left: 30px;
+  padding-bottom: 30px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 20px;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--border-color);
+}
+
+.timeline-content h3 {
+  color: var(--primary-dark);
+  margin-bottom: 5px;
+}
+
+.timeline-period,
+.timeline-degree,
+.timeline-position {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.timeline-description {
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+/* 项目样式 */
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.project-image {
+  height: 180px;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+.project-info {
+  padding: 15px;
+}
+
+.project-info h3 {
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.project-description {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.project-tag {
+  background-color: var(--primary-light);
+  color: white;
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 15px;
+}
+
+/* 兴趣爱好样式 */
+.hobbies-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 20px;
+  text-align: center;
+}
+
+.hobby-item {
+  transition: transform 0.3s ease;
+}
+
+.hobby-item:hover {
+  transform: translateY(-5px);
+}
+
+.hobby-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.hobby-name {
+  font-size: 0.9rem;
+}
+
+/* 底部样式 */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-light);
+  color: white;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  background-color: var(--primary-dark);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact-info {
+    justify-content: center;
+  }
+
+  .skills-container,
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 二次元风格元素 */
+.section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M100,0 C100,55.2 55.2,100 0,100 L0,0 L100,0 Z" fill="rgba(74, 137, 220, 0.05)"/></svg>');
+  background-size: cover;
+}
+
+.about-section::before {
+  content: "★";
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  opacity: 0.2;
+}
+
+.skills-section::before {
+  content: "✧";
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  opacity: 0.2;
+}
+
+.education-section::before {
+  content: "♪";
+  position: absolute;
+  top: 12px;
+  right: 22px;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  opacity: 0.2;
+}
+
+.experience-section::before {
+  content: "♫";
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  opacity: 0.2;
+}
+
+.projects-section::before {
+  content: "☆";
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  opacity: 0.2;
+}
+
+.hobbies-section::before {
+  content: "♡";
+  position: absolute;
+  top: 12px;
+  right: 22px;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  opacity: 0.2;
+}

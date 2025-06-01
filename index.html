@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>二次元风格个人简历</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 引入Vue3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- 引入字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- 引入图标库 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <div id="app">
+    <!-- 头部区域 -->
+    <header class="header">
+      <div class="header-content">
+        <div class="avatar-container">
+          <div class="avatar-border">
+            <img :src="profile.avatar" alt="头像" class="avatar" @error="handleImageError($event, 'avatar')">
+          </div>
+        </div>
+        <div class="header-text">
+          <h1>{{ profile.name }}</h1>
+          <p class="subtitle">{{ profile.title }}</p>
+          <div class="contact-info">
+            <div><i class="bi bi-envelope"></i> {{ profile.email }}</div>
+            <div><i class="bi bi-phone"></i> {{ profile.phone }}</div>
+            <div><i class="bi bi-geo-alt"></i> {{ profile.location }}</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 关于我区域 -->
+    <section class="section about-section">
+      <div class="section-header">
+        <h2><i class="bi bi-person-circle"></i> 关于我</h2>
+      </div>
+      <div class="section-content">
+        <p>{{ profile.about }}</p>
+      </div>
+    </section>
+
+    <!-- 技能区域 -->
+    <section class="section skills-section">
+      <div class="section-header">
+        <h2><i class="bi bi-stars"></i> 技能</h2>
+      </div>
+      <div class="section-content">
+        <div class="skills-container">
+          <div v-for="(skill, index) in skills" :key="index" class="skill-item">
+            <div class="skill-name">{{ skill.name }}</div>
+            <div class="skill-bar-container">
+              <div class="skill-bar" :style="{ width: skill.level + '%' }"></div>
+            </div>
+            <div class="skill-level">{{ skill.level }}%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技能介绍区域 -->
+    <section class="section skill-details-section">
+      <div class="section-header">
+        <h2> 技能介绍</h2>
+      </div>
+      <div class="section-content">
+        <ul class="skill-details-list">
+          <li v-for="(detail, index) in skillDetails" :key="index" class="skill-detail-item">
+            <p v-html="formatSkillDescription(detail.description)"></p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 教育经历 -->
+    <section class="section education-section">
+      <div class="section-header">
+        <h2><i class="bi bi-mortarboard"></i> 教育经历</h2>
+      </div>
+      <div class="section-content">
+        <div v-for="(edu, index) in education" :key="index" class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>{{ edu.school }}</h3>
+            <p class="timeline-period">{{ edu.period }}</p>
+            <p class="timeline-degree">{{ edu.degree }}</p>
+            <p class="timeline-description">{{ edu.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 工作经历 -->
+    <section class="section experience-section">
+      <div class="section-header">
+        <h2><i class="bi bi-briefcase"></i> 工作经历</h2>
+      </div>
+      <div class="section-content">
+        <div v-for="(exp, index) in experience" :key="index" class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>{{ exp.company }}</h3>
+            <p class="timeline-period">{{ exp.period }}</p>
+            <p class="timeline-position">{{ exp.position }}</p>
+            <p class="timeline-description">{{ exp.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 项目经历 -->
+    <section class="section projects-section">
+      <div class="section-header">
+        <h2><i class="bi bi-code-slash"></i> 项目经历</h2>
+      </div>
+      <div class="section-content">
+        <div class="projects-container">
+          <div v-for="(project, index) in projects" :key="index" class="project-card">
+            <div class="project-image">
+              <img :src="project.image || `https://picsum.photos/800/450?random=${index}`" :alt="project.name"
+                @error="handleImageError($event, 'project', index)">
+            </div>
+            <div class="project-info">
+              <h3>{{ project.name }}</h3>
+              <p class="project-description">{{ project.description }}</p>
+              <div class="project-tags">
+                <span v-for="(tag, tagIndex) in project.tags" :key="tagIndex" class="project-tag">{{ tag }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 兴趣爱好 -->
+    <section class="section hobbies-section">
+      <div class="section-header">
+        <h2><i class="bi bi-heart"></i> 兴趣爱好</h2>
+      </div>
+      <div class="section-content">
+        <div class="hobbies-container">
+          <div v-for="(hobby, index) in hobbies" :key="index" class="hobby-item">
+            <div class="hobby-icon">
+              <i :class="hobby.icon"></i>
+            </div>
+            <div class="hobby-name">{{ hobby.name }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 底部区域 -->
+    <footer class="footer">
+      <p>© {{ new Date().getFullYear() }} {{ profile.name }} | 二次元风格个人简历</p>
+    </footer>
+  </div>
+
+  <!-- 背景装饰元素 -->
+  <div class="decoration-elements">
+    <div class="decoration-circle circle-1"></div>
+    <div class="decoration-circle circle-2"></div>
+    <div class="decoration-square square-1"></div>
+    <div class="decoration-square square-2"></div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
